@@ -44,6 +44,7 @@ public class AuthenticationFilter implements Filter {
 		String ipAddress = request.getRemoteAddr();
 		
 		if( userName.equals("psuser") && passwd.equals("psguest")){
+			System.out.println("Servlet Path: " + request.getServletContext().getContextPath());//.getRealPath(request.getServletPath()));
 			System.out.println("User logged in " + ipAddress + " at " + new Date().toString());
 			chain.doFilter(request, response);
 		}
