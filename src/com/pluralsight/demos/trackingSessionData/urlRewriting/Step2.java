@@ -1,4 +1,4 @@
-package com.pluralsight.demos.trackingSessionData.hiddenFields;
+package com.pluralsight.demos.trackingSessionData.urlRewriting;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class Step2
  */
-@WebServlet("/Step2h")
+@WebServlet("/Step2r")
 public class Step2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -29,21 +29,18 @@ public class Step2 extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String guestName = request.getParameter("guestName");
-		response.setContentType("text/html");
+		String email = request.getParameter("email");
 		
+		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		out.println("<html>");
 		out.println("<head>");
 		out.println("<title>Greetings </title>");
 		out.println("</head>");
 		out.println("<body>");
-		out.println("<h3>Welcome " + guestName + "</h3>");
-		out.println("<form name='frm' action='Previewh' method='post'>");
-		out.println("<input type='hidden' name='guestName' value='" + guestName +"'/>");  // Hidden field
-		out.println("<p>Enter Email Id : </p>");
-		out.println("<p><input type='email' name='email' /> </p>");
-		out.println("<p><input type='submit' value='Preview' name='btnPreview' /> </p>");		
-		out.println("</form>");
+		String queryString = "guestName=" + guestName + "&email=" + email;
+		out.println("<a href='Previewr?" + queryString + "'>Preview Data </a> &nbsp;"
+				+ "<a href='SaveDatar?" + queryString + "'>Save Data </a>");
 		out.println("</body>");
 		out.println("</html>");
 		
