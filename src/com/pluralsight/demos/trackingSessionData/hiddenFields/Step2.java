@@ -29,21 +29,18 @@ public class Step2 extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String guestName = request.getParameter("guestName");
-		response.setContentType("text/html");
+		String email = request.getParameter("email");
 		
+		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		out.println("<html>");
 		out.println("<head>");
 		out.println("<title>Greetings </title>");
 		out.println("</head>");
 		out.println("<body>");
-		out.println("<h3>Welcome " + guestName + "</h3>");
-		out.println("<form name='frm' action='Preview' method='post'>");
-		out.println("<input type='hidden' name='guestName' value='" + guestName +"'/>");  // Hidden field
-		out.println("<p>Enter Email Id : </p>");
-		out.println("<p><input type='email' name='email' /> </p>");
-		out.println("<p><input type='submit' value='Preview' name='btnPreview' /> </p>");		
-		out.println("</form>");
+		String queryString = "guestName=" + guestName + "&email=" + email;
+		out.println("<a href='Preview?" + queryString + "'>Preview Data </a> &nbsp;"
+				+ "<a href='SaveData?" + queryString + "'>Save Data </a>");
 		out.println("</body>");
 		out.println("</html>");
 		
